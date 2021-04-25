@@ -12,6 +12,7 @@ This proyect contains code which shows how to use, in a basic way, the next conc
 + Templates (**template.h/cpp**).
 + Constant Exprressions (**constex.h/cpp**).
 + Threads, Async and Promise/Future (**threads.h/cpp**).
++ Generate a Timestamp string with milliseconds. (**timetst.h/cpp**)
 
 # Compiling
 
