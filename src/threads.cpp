@@ -103,8 +103,58 @@ std::cout << "\n(end)MyThread[" << _name << "] Losing time.\n";
 }
 
 
+void TestThreads::procA()
+{
+    std::unique_lock<std::mutex> lck(mtx);
+    std::cout << "\n[ConditionalVariable] ProcA has started.";
+
+    std::cout << "\n\t[ConditionalVariable] ProcA is waiting for subprocess signal.";
+    cv.wait(lck);
+    std::cout << "\n[ConditionalVariable] ProcA has been reactivated.";
+
+    std::cout << "\n\t[ConditionalVariable] ProcA Internal Value = " << internalVaule;
+    
+    std::cout << "\n[ConditionalVariable] ProcA has ended.";
+}
+
+void TestThreads::procB()
+{
+    //std::unique_lock<std::mutex> lcksp(mtx);
+
+    std::cout << "\n[ConditionalVariable] ProcB has started.";
+
+    internalVaule++;
+    std::cout << "\n\t[ConditionalVariable] ProcB Internal Value = " << internalVaule;
+
+    std::cout << "\n\t[ConditionalVariable] ProcB will be wating for 2 seconds.";
+    std::this_thread::sleep_for(std::chrono::duration<suseconds_t>(2)); 
+
+    internalVaule++;
+    std::cout << "\n\t[ConditionalVariable] ProcB Internal Value = " << internalVaule;
+
+    std::cout << "\n\t[ConditionalVariable] ProcB will be wating for 5 seconds.";
+    std::this_thread::sleep_for(std::chrono::duration<suseconds_t>(3));
+
+    internalVaule++;
+    std::cout << "\n\t[ConditionalVariable] ProcB Internal Value = " << internalVaule;
+
+    std::cout << "\n\t[ConditionalVariable] ProcB **** is notifying to all.****";
+    cv.notify_all();
+    
+    
+    std::cout << "\n\t[ConditionalVariable] ProcB will be wating for 2 seconds.";
+    std::this_thread::sleep_for(std::chrono::duration<suseconds_t>(3));
+
+    internalVaule++;
+    std::cout << "\n\t[ConditionalVariable] ProcB Internal Value = " << internalVaule;
+
+    std::cout << "\n[ConditionalVariable] ProcB has ended.";
+}
+
+
 void TestThreads::doTest()
 {
+    std::cout << "\n*** REQUIERES link option: -pthread\n";
     std::cout << "Running test";
 
     CounterClass counter{};
@@ -158,6 +208,16 @@ void TestThreads::doTest()
     std::cout << "Future arrives = " << result << "\n";
     
     tp.join();
-    std::cout << "Promise's Thread ended.\n";
+
+    std::cout   << "Promise's Thread has ended.\n"
+                <<  "........................\n"
+                << "Running with Conditional Variable:\n"; 
+
+    std::thread tcv(&TestThreads::procA, this);
+    std::thread sbt(&TestThreads::procB, this);
+    tcv.join();
+    sbt.join();
+
+    std::cout   << "Conditional Variable has ended.\n";
 
 }   

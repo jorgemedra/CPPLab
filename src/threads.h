@@ -62,13 +62,20 @@ namespace jomt::test
 
     class TestThreads:public jomt::Test
     {
+        int internalVaule;
+        std::mutex mtx;
+        std::condition_variable cv;
 
     public:
 
-        TestThreads():jomt::Test(jomt::TestType::Threads){}
+        TestThreads():jomt::Test(jomt::TestType::Threads), internalVaule{0}{}
         ~TestThreads(){}
         
         void doTest();
+
+        void procA();
+        void procB();
+
     };
 
 

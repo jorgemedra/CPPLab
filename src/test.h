@@ -18,7 +18,9 @@ namespace jomt
         SmartPointer    = 's',        //OK
         Templates       = 't',        //OK
         ConstExpr       = 'x',        //OK
-        Threads         = 'd'         //OK
+        Threads         = 'd',        //OK
+        Time            = 'i',        //OK
+        File            = 'f'         //OK
     };
 
 
@@ -83,6 +85,14 @@ namespace jomt
 
             case TestType::Threads:
                 out << " Threads Test";
+                break;
+
+            case TestType::Time:
+                out << " Time Test";
+                break;
+            
+            case TestType::File:
+                out << " File Test";
                 break;
 
             default:

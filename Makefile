@@ -18,12 +18,14 @@ OBJ_FLS = 		$(OBJ_DIR)/const.o \
 				$(OBJ_DIR)/smartptr.o \
 				$(OBJ_DIR)/template.o \
 				$(OBJ_DIR)/virtual.o \
-				$(OBJ_DIR)/threads.o
+				$(OBJ_DIR)/threads.o \
+				$(OBJ_DIR)/timetst.o \
+				$(OBJ_DIR)/file.o
 
 CC 			= g++
 GDB			= gdb
-LFLAGS		= -pthread
-CPPFLAGS	= -c -Wall -MD
+LFLAGS		= -pthread -lstdc++fs
+CPPFLAGS	= -c -std=c++17 -Wall -MD
 
 ifdef DBGFLG
 override CPPFLAGS += $(DBGFLG)

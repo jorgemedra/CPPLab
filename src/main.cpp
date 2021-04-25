@@ -11,6 +11,8 @@
 #include "template.h"
 #include "constex.h"
 #include "threads.h"
+#include "timetst.h"
+#include "file.h"
 
 using namespace jomt::test;
 
@@ -69,6 +71,16 @@ int main()
             TestThreads tt;
             tt.runTest();
         }
+        else if( opt == (int)jomt::TestType::Time) 
+        {
+            TimeTest ttm;
+            ttm.runTest();
+        }
+        else if( opt == (int)jomt::TestType::Time) 
+        {
+            FileTest ft;
+            ft.runTest();
+        }
     }
     while(opt != 'q');
 
@@ -90,5 +102,7 @@ void printHelp()
                 << "\tt: Templates Test.\n"
                 << "\td: Threads Test.\n"
                 << "\tx: Constant Expr Test.\n"
+                << "\ti: Time Test.\n"
+                << "\tf: File Test.\n"
                 << "-----------------------\n\n";
 }
