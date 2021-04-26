@@ -1,7 +1,6 @@
 {
     "files.associations": {
         "chrono": "cpp",
-        "filesystem": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",

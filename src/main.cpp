@@ -18,71 +18,104 @@ using namespace jomt::test;
 
 void printHelp();
 
+struct M_CMDS
+{
+    const static std::string QT;
+    const static std::string PTRS;
+    const static std::string CONST;
+    const static std::string MUTBL;
+    const static std::string VRTL;
+    const static std::string LRVL;
+    const static std::string SMRPTR;
+    const static std::string TMPLTS;
+    const static std::string CNSTXPR;
+    const static std::string THRD;
+    const static std::string TM;
+    const static std::string FL;
+};
+
+const std::string M_CMDS::QT{"quit"};
+const std::string M_CMDS::PTRS{"ptrs"};
+const std::string M_CMDS::CONST{"const"};
+const std::string M_CMDS::MUTBL{"mutable"};
+const std::string M_CMDS::VRTL{"virtual"};
+const std::string M_CMDS::LRVL{"lrvalue"};
+const std::string M_CMDS::SMRPTR{"smartptr"};
+const std::string M_CMDS::TMPLTS{"templates"};
+const std::string M_CMDS::CNSTXPR{"constexpr"};
+const std::string M_CMDS::THRD{"threads"};
+const std::string M_CMDS::TM{"time"};
+const std::string M_CMDS::FL{"file"};
+
+
 int main()
 {
-    char opt{0};
+    std::string opt{""};
 
     do{
         printHelp();
         std::cin >> opt;
+        
+        for(size_t idx = 0; idx < opt.size(); idx++)
+            opt[idx] = std::tolower(opt[idx]);
 
-        if( opt == (int)jomt::TestType::Pointers ) 
+        if( opt.compare(M_CMDS::PTRS)  == 0) 
         {
                 TestPointer tPointer;
                 tPointer.runTest();
         }
-        else if( opt == (int)jomt::TestType::Consts ) 
+        else if(opt.compare(M_CMDS::CONST)  == 0)
         {
             TestConst tConst;
             tConst.runTest();
         }
-        else if( opt == (int)jomt::TestType::Mutable ) 
+        else if(opt.compare(M_CMDS::MUTBL)  == 0)
         {
             TestMutable tMut;
             tMut.runTest();
         }
-        else if( opt == (int)jomt::TestType::Virutal ) 
+        else if(opt.compare(M_CMDS::VRTL)  == 0)
         {
             TestVirtual tVir;
             tVir.runTest();
         }
-        else if( opt == (int)jomt::TestType::LRValue ) 
+        else if(opt.compare(M_CMDS::LRVL)  == 0)
         {
             TestRLValue tRL;
             tRL.runTest();
         }
-        else if( opt == (int)jomt::TestType::SmartPointer ) 
+        else if(opt.compare(M_CMDS::SMRPTR)  == 0)
         {
             TestSmartPtr tSP;
             tSP.runTest();
         }
-        else if( opt == (int)jomt::TestType::Templates ) 
+        else if(opt.compare(M_CMDS::TMPLTS)  == 0)
         {
             TestTemplate tTmpt;
             tTmpt.runTest();
         }
-        else if( opt == (int)jomt::TestType::ConstExpr ) 
+        else if(opt.compare(M_CMDS::CNSTXPR)  == 0)
         {
             TestConstExpr tCE;
             tCE.runTest();
         }
-        else if( opt == (int)jomt::TestType::Threads ) 
+        else if(opt.compare(M_CMDS::THRD)  == 0)
         {
             TestThreads tt;
             tt.runTest();
         }
-        else if( opt == (int)jomt::TestType::Time) 
+        else if(opt.compare(M_CMDS::TM)  == 0)
         {
             TimeTest ttm;
             ttm.runTest();
         }
-        else if( opt == (int)jomt::TestType::Time) 
+        else if(opt.compare(M_CMDS::FL)  == 0)
         {
             FileTest ft;
             ft.runTest();
         }
     }
-    while(opt != 'q');
+    while(opt.compare(M_CMDS::QT) != 0);
 
     return 0;
 }
@@ -91,18 +124,19 @@ int main()
 void printHelp()
 {
     std::cout   << "\n-----------------------\n"
-                << "Test Menu:\n"
-                << "\tq: Quit.\n"
-                << "\tp: Pointers Test.\n"
-                << "\tc: Consts Test.\n"
-                << "\tm: Mutable Test.\n"
-                << "\tv: Virutal Test.\n"
-                << "\tr: LRValue Test.\n"
-                << "\ts: Smart Pointers Test.\n"
-                << "\tt: Templates Test.\n"
-                << "\td: Threads Test.\n"
-                << "\tx: Constant Expr Test.\n"
-                << "\ti: Time Test.\n"
-                << "\tf: File Test.\n"
-                << "-----------------------\n\n";
+                << "Commands:\n"
+                << "\t" << M_CMDS::QT << ": Quit.\n"
+                << "\t" << M_CMDS::PTRS << ": Pointers Test.\n"
+                << "\t" << M_CMDS::CONST << ": Consts Test.\n"
+                << "\t" << M_CMDS::MUTBL << ": Mutable Test.\n"
+                << "\t" << M_CMDS::VRTL << ": Virutal Test.\n"
+                << "\t" << M_CMDS::LRVL << ": LRValue Test.\n"
+                << "\t" << M_CMDS::SMRPTR << ": Smart Pointers Test.\n"
+                << "\t" << M_CMDS::TMPLTS << ": Templates Test.\n"
+                << "\t" << M_CMDS::THRD << ": Threads Test.\n"
+                << "\t" << M_CMDS::CNSTXPR << ": Constant Expr Test.\n"
+                << "\t" << M_CMDS::TM << ": Time Test.\n"
+                << "\t" << M_CMDS::FL << ": File Test.\n"
+                << "-----------------------\n\n"
+                << "::$";
 }

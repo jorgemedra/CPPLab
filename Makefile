@@ -1,8 +1,8 @@
 
-#
+#********************************
 # Compile with debug option:
 #	make DBGFLG=-g
-#
+#********************************
 
 TARGET 	=		tutorial 
 SRC_DIR	= 		./src

@@ -9,21 +9,22 @@ This proyect contains code which shows how to use, in a basic way, the next conc
 + *virutal* keyword (polymophism) (**virtual.h/cpp**).
 + Left/Right Value (**rlvalue.h/cpp**).
 + Smart Pointers (**smartptr.h/cpp**).
-+ Templates (**template.h/cpp**).
-+ Constant Exprressions (**constex.h/cpp**).
-+ Threads, Async and Promise/Future (**threads.h/cpp**).
++ *template* samples (**template.h/cpp**).
++ *constexpr* sample (**constex.h/cpp**).
++ *thread*, *async* and *promise*/*future* samples (**threads.h/cpp**).
 + Generate a Timestamp string with milliseconds. (**timetst.h/cpp**)
++ Getting file information. (**file.h/cpp**)
 
 # Compiling
 
 ## Requierements
 
-    1. GNU Make or above.
-    2. g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
-    3. GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9, for debugin.
-    4. Visual Studio Code 1.55 or above.
-
-
+    1. C++17 Standar.
+    2. GNU Make or above.
+    3. g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0.
+    4. GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9, for debugin.
+    5. Visual Studio Code 1.55 or above.
+    
 
 ## Make
 
