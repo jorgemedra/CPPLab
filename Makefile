@@ -20,7 +20,9 @@ OBJ_FLS = 		$(OBJ_DIR)/const.o \
 				$(OBJ_DIR)/virtual.o \
 				$(OBJ_DIR)/threads.o \
 				$(OBJ_DIR)/timetst.o \
-				$(OBJ_DIR)/file.o
+				$(OBJ_DIR)/file.o \
+				$(OBJ_DIR)/lambdas.o \
+				$(OBJ_DIR)/str_view.o
 
 CC 			= g++
 GDB			= gdb

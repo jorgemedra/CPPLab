@@ -13,6 +13,8 @@
 #include "threads.h"
 #include "timetst.h"
 #include "file.h"
+#include "lambdas.h"
+#include "str_view.h"
 
 using namespace jomt::test;
 
@@ -32,6 +34,8 @@ struct M_CMDS
     const static std::string THRD;
     const static std::string TM;
     const static std::string FL;
+    const static std::string LMBDS;
+    const static std::string STRVW;
 };
 
 const std::string M_CMDS::QT{"quit"};
@@ -46,7 +50,8 @@ const std::string M_CMDS::CNSTXPR{"constexpr"};
 const std::string M_CMDS::THRD{"threads"};
 const std::string M_CMDS::TM{"time"};
 const std::string M_CMDS::FL{"file"};
-
+const std::string M_CMDS::LMBDS{"lambdas"};
+const std::string M_CMDS::STRVW{"strview"};
 
 int main()
 {
@@ -114,6 +119,16 @@ int main()
             FileTest ft;
             ft.runTest();
         }
+        else if(opt.compare(M_CMDS::LMBDS)  == 0)
+        {
+            LambdaTest lbt;
+            lbt.runTest();
+        }
+        else if(opt.compare(M_CMDS::STRVW)  == 0)
+        {
+            TestStringView tsv;
+            tsv.runTest();
+        }
     }
     while(opt.compare(M_CMDS::QT) != 0);
 
@@ -137,6 +152,8 @@ void printHelp()
                 << "\t" << M_CMDS::CNSTXPR << ": Constant Expr Test.\n"
                 << "\t" << M_CMDS::TM << ": Time Test.\n"
                 << "\t" << M_CMDS::FL << ": File Test.\n"
+                << "\t" << M_CMDS::LMBDS << ": Lambdas Test.\n"
+                << "\t" << M_CMDS::STRVW << ": String View Test.\n"
                 << "-----------------------\n\n"
                 << "::$";
 }

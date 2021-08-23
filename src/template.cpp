@@ -9,13 +9,6 @@ void TestTemplate::setName(std::string name)
     _nameChild = name;
 }
 
-/*
-void TestTemplate::name() const
-{
-    std::cout << "Child Name: "<< _nameChild ;
-}
-*/
-
 std::ostream& jomt::test::operator<<(std::ostream& strm, const TestTemplate& t)
 {
     return strm << "[Name: " << t._nameChild << ", Counter: " << t._counter << "]";
@@ -27,6 +20,17 @@ TestTemplate& TestTemplate::operator++(int x)
     return *this;
 }
 
+void TestTemplate::testIhnerence()
+{
+    std::cout << "\n\nTesting Inherence:";
+
+    Child<std::string, int> child("MyKey", 666);
+    std::cout << "\n\tTesting Inherence (BEFORE): " << child.Key() << " : " << child.Value();
+    child++;
+    std::cout << "\n\tTesting Inherence (AFTER) : " << child.Key() << " : " << child.Value();
+
+    std::cout << "\n..........................................\n";
+}
 
 void TestTemplate::doTest()
 {
@@ -56,5 +60,7 @@ void TestTemplate::doTest()
     mtTest.printIntoByRef(tX);
 
     myFunOnTemplate<TestTemplate, 666>(tX);
+
+    testIhnerence();
 
 }

@@ -20,7 +20,9 @@ namespace jomt
         ConstExpr       = 'x',        //OK
         Threads         = 'd',        //OK
         Time            = 'i',        //OK
-        File            = 'f'         //OK
+        File            = 'f',        //OK
+        Lambda          = 'l',        //OK
+        StringView      = 'V'         //OK
     };
 
 
@@ -93,6 +95,14 @@ namespace jomt
             
             case TestType::File:
                 out << " File Test";
+                break;
+
+            case TestType::Lambda:
+                out << " Lambdas";
+                break;
+
+            case TestType::StringView:                
+                out << " String View";
                 break;
 
             default:

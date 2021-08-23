@@ -43,11 +43,45 @@ namespace jomt::test
     }
 
 
+    template<class K, class T>
+    class Parent
+    {
+        using key_type = K;
+        using value_type = T;
+
+    protected:
+        key_type _key;
+        value_type _value;
+
+    public:
+        Parent(key_type k, value_type v): _key{k}, _value{v}{}
+        
+        const key_type& Key(){return _key;}
+        const value_type& Value(){return _value;}
+    };
+
+    template<class K, class T>
+    class Child: public Parent<K,T>
+    {   
+        using key_type = K;
+        using value_type = T;
+        
+    public:
+        Child(key_type k, value_type v): Parent<K,T>(k,v){}
+
+        Child operator++(int n){
+            this->_value++;
+            return *this;
+        }
+    };
+
+
     class TestTemplate: public jomt::Test
     {
         std::string _nameChild;
         size_t _counter;
 
+        void testIhnerence();
     public:
 
         TestTemplate():  jomt::Test(jomt::TestType::Templates),
