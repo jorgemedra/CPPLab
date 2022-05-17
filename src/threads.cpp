@@ -5,6 +5,69 @@
 
 using namespace jomt::test;
 
+TAB::TAB() : BaseTA{1}, BaseTB{2} {
+    std::cout << "TAB()" << std::endl;
+    BaseTA::start();
+    BaseTB::start();
+}
+
+void TAB::join()
+{
+    BaseTA::join();
+    BaseTB::join();
+}
+
+void TAB::on_leap(int id)
+{
+    std::unique_lock<std::mutex> lck(mtx);
+    std::cout << "Message from the thread of Base Class: " << id << "\n";
+}
+
+void BaseTA::start()
+{
+    if (running) return;
+    running = true;
+    std::cout << "BaseTA::start" << std::endl;
+    m_t = std::unique_ptr<std::thread>(new std::thread(&BaseTA::run, this));
+}
+
+void BaseTB::start()
+{
+    if (running) return;
+    running = true;
+    std::cout << "BaseTB::start" << std::endl;
+    m_t = std::unique_ptr<std::thread>(new std::thread(&BaseTB::run, this));
+}
+
+void BaseTA::run()
+{
+    std::cout << "BaseTA::run" << std::endl;
+    int counter{0};
+    while (running && counter < 10)
+    {
+        counter++;
+        std::this_thread::sleep_for(std::chrono::duration<suseconds_t>(1));
+        on_leap(_id);
+        
+    }
+    running = false;
+}
+
+void BaseTB::run()
+{
+    std::cout << "BaseTB::run" << std::endl;
+    int counter{0};
+    while (running && counter < 10)
+    {
+        counter++;
+        std::this_thread::sleep_for(std::chrono::duration<suseconds_t>(2));
+        on_leap(_id);
+    }
+    running = false;
+}
+void BaseTA::join() {m_t->join();}
+void BaseTB::join() { m_t->join(); }
+
 
 void CounterClass::increaseSingle()
 {
@@ -152,6 +215,9 @@ void TestThreads::procB()
 }
 
 
+
+
+
 void TestThreads::doTest()
 {
     std::cout << "\n*** REQUIERES link option: -pthread\n";
@@ -218,6 +284,8 @@ void TestThreads::doTest()
     tcv.join();
     sbt.join();
 
-    std::cout   << "Conditional Variable has ended.\n";
-
+    std::cout << "\nTesting Inherice Clas." << std::endl;
+    TAB tab;
+    tab.join();
+    std::cout << "Conditional Variable has ended." << std::endl;
 }   

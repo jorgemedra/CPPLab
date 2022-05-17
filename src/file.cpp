@@ -49,12 +49,13 @@
 
 
 using namespace  jomt::test;
-namespace fs = std::filesystem;
-namespace fspth = std::filesystem::__cxx11;
+//namespace fs = std::filesystem;
+//namespace fspth = std::filesystem::__cxx11;
 
 
 void FileTest::doTest()
 {
+    /*
     std::cout << "Getting current path with fs::current_path():\n";
     fspth::path pth = fs::current_path();
     std::cout << "\tCURRENT PATH: [" << pth << "]\n";
@@ -87,5 +88,7 @@ void FileTest::doTest()
         std::strftime(bufTime, sizeof bufTime, "%F %H:%M:%S", timeinfo);
         std::cout << "\tModif. Time: " << bufTime << "\n"
                   << "\tIt has a size of: " <<  result.st_size << " bytes\n";
+        
     }
+    */
 }

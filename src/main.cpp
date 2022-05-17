@@ -1,6 +1,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <array>
 
 #include "pointer.h"
 #include "const.h"
@@ -15,6 +16,10 @@
 #include "file.h"
 #include "lambdas.h"
 #include "str_view.h"
+#include "maps.h"
+#include "tpair.h"
+#include "metaprog.h"
+#include "parameters.h"
 
 using namespace jomt::test;
 
@@ -36,6 +41,10 @@ struct M_CMDS
     const static std::string FL;
     const static std::string LMBDS;
     const static std::string STRVW;
+    const static std::string MAPS;
+    const static std::string PAIRS;
+    const static std::string META;
+    const static std::string PARAMS;
 };
 
 const std::string M_CMDS::QT{"quit"};
@@ -52,6 +61,40 @@ const std::string M_CMDS::TM{"time"};
 const std::string M_CMDS::FL{"file"};
 const std::string M_CMDS::LMBDS{"lambdas"};
 const std::string M_CMDS::STRVW{"strview"};
+const std::string M_CMDS::MAPS{"maps"};
+const std::string M_CMDS::PAIRS{"pairs"};
+const std::string M_CMDS::META{"metap"};
+const std::string M_CMDS::PARAMS{"params"};
+
+std::string exec(const char *cmd)
+{
+    std::array<char, 128> buffer;
+    std::string result;
+    auto pipe = popen(cmd, "r"); // get rid of shared_ptr
+
+    if (pipe == 0)
+        throw std::runtime_error("popen() failed!");
+
+    std::cout << "POPE READING" << std::endl;
+    while (!feof(pipe))
+    {
+        if (fgets(buffer.data(), 128, pipe) != nullptr)
+            result += buffer.data();
+    }
+
+    std::cout << "RESULT: " << std::endl
+              << result << std::endl;
+              
+    auto rc = pclose(pipe);
+
+    if (rc == EXIT_SUCCESS)
+    { // == 0
+    }
+    else if (rc == EXIT_FAILURE)
+    { // EXIT_FAILURE is not used by all programs, maybe needs some adaptation.
+    }
+    return result;
+}
 
 int main()
 {
@@ -129,31 +172,54 @@ int main()
             TestStringView tsv;
             tsv.runTest();
         }
+        else if(opt.compare(M_CMDS::MAPS)  == 0)
+        {
+            MapTest tsm;
+            tsm.runTest();
+        }
+        else if(opt.compare(M_CMDS::PAIRS)  == 0)
+        {
+            TestPair tpr;
+            tpr.runTest();
+        }
+        else if (opt.compare(M_CMDS::META) == 0)
+        {
+            MetaTest mttp;
+            mttp.runTest();
+        }
+        else if (opt.compare(M_CMDS::PARAMS) == 0)
+        {
+            jomt::test::TestParameters prmtst;
+            prmtst.runTest();
+        }
     }
     while(opt.compare(M_CMDS::QT) != 0);
 
     return 0;
 }
 
-
 void printHelp()
 {
-    std::cout   << "\n-----------------------\n"
-                << "Commands:\n"
-                << "\t" << M_CMDS::QT << ": Quit.\n"
-                << "\t" << M_CMDS::PTRS << ": Pointers Test.\n"
-                << "\t" << M_CMDS::CONST << ": Consts Test.\n"
-                << "\t" << M_CMDS::MUTBL << ": Mutable Test.\n"
-                << "\t" << M_CMDS::VRTL << ": Virutal Test.\n"
-                << "\t" << M_CMDS::LRVL << ": LRValue Test.\n"
-                << "\t" << M_CMDS::SMRPTR << ": Smart Pointers Test.\n"
-                << "\t" << M_CMDS::TMPLTS << ": Templates Test.\n"
-                << "\t" << M_CMDS::THRD << ": Threads Test.\n"
-                << "\t" << M_CMDS::CNSTXPR << ": Constant Expr Test.\n"
-                << "\t" << M_CMDS::TM << ": Time Test.\n"
-                << "\t" << M_CMDS::FL << ": File Test.\n"
-                << "\t" << M_CMDS::LMBDS << ": Lambdas Test.\n"
-                << "\t" << M_CMDS::STRVW << ": String View Test.\n"
-                << "-----------------------\n\n"
-                << "::$";
+    std::cout << "\n-----------------------\n"
+              << "Commands:\n"
+              << "\t" << M_CMDS::QT << ": Quit.\n"
+              << "\t" << M_CMDS::PTRS << ": Pointers Test.\n"
+              << "\t" << M_CMDS::CONST << ": Consts Test.\n"
+              << "\t" << M_CMDS::MUTBL << ": Mutable Test.\n"
+              << "\t" << M_CMDS::VRTL << ": Virutal Test.\n"
+              << "\t" << M_CMDS::LRVL << ": LRValue Test.\n"
+              << "\t" << M_CMDS::SMRPTR << ": Smart Pointers Test.\n"
+              << "\t" << M_CMDS::TMPLTS << ": Templates Test.\n"
+              << "\t" << M_CMDS::THRD << ": Threads Test.\n"
+              << "\t" << M_CMDS::CNSTXPR << ": Constant Expr Test.\n"
+              << "\t" << M_CMDS::TM << ": Time Test.\n"
+              << "\t" << M_CMDS::FL << ": File Test.\n"
+              << "\t" << M_CMDS::LMBDS << ": Lambdas Test.\n"
+              << "\t" << M_CMDS::STRVW << ": String View Test.\n"
+              << "\t" << M_CMDS::MAPS << ": Maps Test.\n"
+              << "\t" << M_CMDS::PAIRS << ": Pairs & Tuples Test.\n"
+              << "\t" << M_CMDS::META << ": Metaprograming Test.\n"
+              << "\t" << M_CMDS::PARAMS << ": Parameters Test.\n"
+              << "-----------------------\n\n"
+              << "$ ";
 }

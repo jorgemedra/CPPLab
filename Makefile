@@ -22,12 +22,27 @@ OBJ_FLS = 		$(OBJ_DIR)/const.o \
 				$(OBJ_DIR)/timetst.o \
 				$(OBJ_DIR)/file.o \
 				$(OBJ_DIR)/lambdas.o \
-				$(OBJ_DIR)/str_view.o
+				$(OBJ_DIR)/str_view.o \
+				$(OBJ_DIR)/maps.o \
+				$(OBJ_DIR)/parameters.o \
+				$(OBJ_DIR)/metaprog.o \
+				$(OBJ_DIR)/tpair.o
+
+#INCLUDES	= -I/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1
+#LIBS		= -L/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/lib
+
+#export CPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+#export CPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+
+INCLUDES 	= -I/Volumes/SSD480/XCode/13.3/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+LIBS 		= -L/Volumes/SSD480/XCode/13.3/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib
 
 CC 			= g++
 GDB			= gdb
-LFLAGS		= -pthread -lstdc++fs
-CPPFLAGS	= -c -std=c++17 -Wall -MD
+LFLAGS		= $(LIBS) -pthread -lc++
+CPPFLAGS	= -c $(INCLUDES) -std=c++17 -Wall -MD
+#LFLAGS		= -pthread -lc++
+#CPPFLAGS	= -c -std=c++17 -Wall -MD
 
 ifdef DBGFLG
 override CPPFLAGS += $(DBGFLG)

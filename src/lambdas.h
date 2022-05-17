@@ -1,5 +1,5 @@
 #ifndef LAMBDAS_H
-#define LAMBDAS_Ha
+#define LAMBDAS_H
 #pragma once
 
 #include "test.h"

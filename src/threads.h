@@ -8,7 +8,6 @@
 #include <mutex>
 #include <thread>
 #include <future>
-
 namespace jomt::test
 {
 
@@ -56,9 +55,46 @@ namespace jomt::test
         void runPromise(std::promise<int>);
     };
 
-    
-    
+    class BaseTA
+    {
+        int _id;
+        bool running;
+        std::unique_ptr<std::thread> m_t;
 
+    public:
+        BaseTA(int id) : _id{id}, running{false} {}
+        ~BaseTA(){}
+        void start();
+        void join();
+        void run();
+        
+        virtual void on_leap(int id) = 0;
+    };
+
+    class BaseTB
+    {
+        int _id;
+        bool running;
+        std::unique_ptr<std::thread> m_t;
+
+    public:
+        BaseTB(int id) : _id{id}, running{false} {}
+        ~BaseTB() {}
+        void start();
+        void join();
+        void run();
+
+        virtual void on_leap(int id) = 0;
+    };
+
+    class TAB : public BaseTA, public BaseTB
+    {
+        std::mutex mtx;
+        public:
+            TAB();
+            void join();
+            void on_leap(int id);
+    };
 
     class TestThreads:public jomt::Test
     {

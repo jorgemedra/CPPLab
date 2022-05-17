@@ -8,23 +8,26 @@
 namespace jomt
 {
 
-    enum class TestType: char
+    enum class TestType : char
     {
-        Pointers        = 'p',        //OK
-        Consts          = 'c',        //OK
-        Mutable         = 'm',        //OK
-        Virutal         = 'v',        //OK
-        LRValue         = 'r',        //OK
-        SmartPointer    = 's',        //OK
-        Templates       = 't',        //OK
-        ConstExpr       = 'x',        //OK
-        Threads         = 'd',        //OK
-        Time            = 'i',        //OK
-        File            = 'f',        //OK
-        Lambda          = 'l',        //OK
-        StringView      = 'V'         //OK
+        Pointers = 'p',     // OK
+        Consts = 'c',       // OK
+        Mutable = 'm',      // OK
+        Virutal = 'v',      // OK
+        LRValue = 'r',      // OK
+        SmartPointer = 's', // OK
+        Templates = 't',    // OK
+        ConstExpr = 'x',    // OK
+        Threads = 'd',      // OK
+        Time = 'i',         // OK
+        File = 'f',         // OK
+        Lambda = 'l',       // OK
+        StringView = 'V',   // OK
+        Maps = 'T',         // OK
+        Pair = 'P',         // OK
+        Meta = 'M',         // OK
+        Params = 'A',         // OK
     };
-
 
     class Test
     {
@@ -100,11 +103,21 @@ namespace jomt
             case TestType::Lambda:
                 out << " Lambdas";
                 break;
-
             case TestType::StringView:                
                 out << " String View";
                 break;
-
+            case TestType::Maps:
+                out << " Map";
+                break;
+            case TestType::Pair:
+                out << " Pair";
+                break;
+            case TestType::Meta:
+                out << " Metaprogramig";
+                break;
+            case TestType::Params:
+                out << " Parameters";
+                break;
             default:
                 out << "UKNOWN Test";
                 break;
