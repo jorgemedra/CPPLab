@@ -4,7 +4,7 @@
 #include <iostream>
 
 using namespace jomt::test;
-using namespace  jomt::data;
+using namespace jomt::data;
 
 void TestMatrix::doTest()
 {

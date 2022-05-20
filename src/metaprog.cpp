@@ -176,27 +176,27 @@ void MetaTest::TestIteratorAndRec()
 //----- Select
 
 //Defining select template and structure, which has limit elements accoring the template.
-template <unsigned N, typename... Cases>
-struct select;
+// template <unsigned N, typename... Cases>
+// struct select;
 
-template <unsigned N, typename T, typename... Cases>
-struct select<N, T, Cases...>:select<N-1, Cases...>{};
+// template <unsigned N, typename T, typename... Cases>
+// struct select<N, T, Cases...>:select<N-1, Cases...>{};
 
-template <typename T, typename... Cases>
-struct select<0, T, Cases...>{
-    using type = T;
-};
+// template <typename T, typename... Cases>
+// struct select<0, T, Cases...>{
+//     using type = T;
+// };
 
-template <unsigned N, typename... Cases>
-using Select = typename select<N, Cases...>::type;
+// template <unsigned N, typename... Cases>
+// using Select = typename select<N, Cases...>::type;
 
-void MetaTest::TestVariadic()
-{
-    //Select<0, char, int, DummyClass, KeyClass> t1;
-    //auto t1 = Select<1>::type;
-    //std::cout << "\t" << typeid(t1).name() << "\n";
+// void MetaTest::TestVariadic()
+// {
+//     //Select<0, char, int, DummyClass, KeyClass> t1;
+//     //auto t1 = Select<1>::type;
+//     //std::cout << "\t" << typeid(t1).name() << "\n";
 
-}
+// }
 
 #pragma endregion
 

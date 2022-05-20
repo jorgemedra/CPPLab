@@ -21,48 +21,111 @@ This proyect contains code which shows how to use, in a basic way, the next conc
 
     1. C++17 Standar.
     2. GNU Make or above.
-    3. g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0.
-    4. GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9, for debugin.
-    5. Visual Studio Code 1.55 or above.
+    3. CMAKE 3.18 or later
+    4. GNU gdb 9 or later, for debugin.
+    5. Visual Studio Code
     
 
-## Make
+## Pre-Compile steps
 
-To get help to use the Makefile:
+> Considere **${BASE_DIR}** as the base dir of the proyect.
+
+1. Create a new dir called *{BASE_DIR}/build* and change into that new directory.
+2. execute the one of these three commands:
+
+    a. To build a release producto.
 ```shell
-$make help
-.............................................
-Build test: make
-Run, after building: make run
-Build and activate debug: make DBGFLG=-g
-Clean compiled files: make clean
+$ cmake ../src
+```
+    b. To build and activate debug info.
 
+```shell
+$ cmake ../src -DUSE_DEBUG=ON
+```
+    b. To build and deactivate debug info, producing a release product.
+
+```shell
+$ cmake ../src -DUSE_DEBUG=OFF
 ```
 
-To compile and build all the project:
+## Compiling
+
+Once the precompile stepts have been performed, compile the project with the next command:
+
+> You must be located into the path *{BASE_DIR}/build*
+
 ```shell
-$make
+$ cmake --build .
 ```
 
-To compile and activate debug info:
+The console should shows an output like this:
 
 ```shell
-$make DBGFLG=-g
+$ cmake --build .
+Consolidate compiler generated dependencies of target cpplab
+[  5%] Building CXX object CMakeFiles/cpplab.dir/const.cpp.o
+[ 10%] Building CXX object CMakeFiles/cpplab.dir/constex.cpp.o
+[ 15%] Building CXX object CMakeFiles/cpplab.dir/main.cpp.o
+[ 20%] Building CXX object CMakeFiles/cpplab.dir/mutable.cpp.o
+[ 25%] Building CXX object CMakeFiles/cpplab.dir/pointer.cpp.o
+[ 30%] Building CXX object CMakeFiles/cpplab.dir/rlvalue.cpp.o
+[ 35%] Building CXX object CMakeFiles/cpplab.dir/smartptr.cpp.o
+[ 40%] Building CXX object CMakeFiles/cpplab.dir/template.cpp.o
+[ 45%] Building CXX object CMakeFiles/cpplab.dir/virtual.cpp.o
+[ 50%] Building CXX object CMakeFiles/cpplab.dir/threads.cpp.o
+[ 55%] Building CXX object CMakeFiles/cpplab.dir/timetst.cpp.o
+[ 60%] Building CXX object CMakeFiles/cpplab.dir/file.cpp.o
+[ 65%] Building CXX object CMakeFiles/cpplab.dir/lambdas.cpp.o
+[ 70%] Building CXX object CMakeFiles/cpplab.dir/str_view.cpp.o
+[ 75%] Building CXX object CMakeFiles/cpplab.dir/maps.cpp.o
+[ 80%] Building CXX object CMakeFiles/cpplab.dir/tpair.cpp.o
+[ 85%] Building CXX object CMakeFiles/cpplab.dir/metaprog.cpp.o
+[ 90%] Building CXX object CMakeFiles/cpplab.dir/parameters.cpp.o
+/home/jorge/vsworkspace/CPPLab/src/parameters.cpp: En la función ‘jomt::test::KeyClass&& createKey(int)’:
+/home/jorge/vsworkspace/CPPLab/src/parameters.cpp:14:21: aviso: reference to local variable ‘key’ returned [-Wreturn-local-addr]
+   14 |     return std::move(key);
+      |            ~~~~~~~~~^~~~~
+/home/jorge/vsworkspace/CPPLab/src/parameters.cpp:11:14: nota: se declara aquí
+   11 |     KeyClass key(key_i);
+      |              ^~~
+[ 95%] Building CXX object CMakeFiles/cpplab.dir/test_matrix.cpp.o
+[100%] Linking CXX executable cpplab
+[100%] Built target cpplab
 ```
 
-To excute the program:
+Once the project has been created, you can run it with the command `./cpplab`, on the same path (*{BASE_DIR}/build*):
+
 ```shell
-$make run
+$ ./cpplab 
+
+-----------------------
+Commands:
+	quit: Quit.
+	ptrs: Pointers Test.
+	const: Consts Test.
+	mutable: Mutable Test.
+	virtual: Virutal Test.
+	lrvalue: LRValue Test.
+	smartptr: Smart Pointers Test.
+	templates: Templates Test.
+	threads: Threads Test.
+	constexpr: Constant Expr Test.
+	time: Time Test.
+	file: File Test.
+	lambdas: Lambdas Test.
+	strview: String View Test.
+	maps: Maps Test.
+	pairs: Pairs & Tuples Test.
+	metap: Metaprograming Test.
+	params: Parameters Test.
+	matrix: Matrix Operations.
+-----------------------
+
+$ _
 ```
 
-or
+To clear the compiler/build output 
 
 ```shell
-$./bin/tutorial
-```
-
-To clean all the compiled files:
-
-```shell
-$make clean
+$ cmake --build . --target clean
 ```

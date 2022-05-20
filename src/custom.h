@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <functional>
 
 namespace jomt::test
 {

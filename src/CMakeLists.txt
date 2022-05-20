@@ -1,13 +1,21 @@
-#from https://www.youtube.com/watch?v=LFSJcdYZcvo&t=9s
+# CMAKE Reference Documentation:
+#  https://cmake.org/cmake/help/latest/guide/tutorial/index.html
+
 cmake_minimum_required(VERSION 3.12)
 
 set(CMAKE_CXX_STANDARD  17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-#set(CMAKE_LINK_LIBRARY_FLAG -pthread -lstdc++fs)
 
 project(CPPLaboratoryProject VERSION 1.0)
 
-add_compile_options("-g")
+#To activate the Debug info and get able to debug with the IDE
+if(USE_DEBUG)
+    message(STATUS "Debug mode is ON")
+    add_compile_options("-g")
+else()
+    message(STATUS "Debug mode is OFF")
+endif()
+
 add_executable( cpplab 
                 const.cpp 
                 constex.cpp 
