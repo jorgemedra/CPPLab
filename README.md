@@ -34,15 +34,18 @@ This proyect contains code which shows how to use, in a basic way, the next conc
 2. execute the one of these three commands:
 
     a. To build a release producto.
+
 ```shell
 $ cmake ../src
 ```
-    b. To build and activate debug info.
+
+	b. To build and activate debug info.
 
 ```shell
 $ cmake ../src -DUSE_DEBUG=ON
 ```
-    b. To build and deactivate debug info, producing a release product.
+
+    c. To build and deactivate debug info, producing a release product.
 
 ```shell
 $ cmake ../src -DUSE_DEBUG=OFF
