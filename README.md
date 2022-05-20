@@ -14,6 +14,12 @@ This proyect contains code which shows how to use, in a basic way, the next conc
 + *thread*, *async* and *promise*/*future* samples (**threads.h/cpp**).
 + Generate a Timestamp string with milliseconds. (**timetst.h/cpp**)
 + Getting file information. (**file.h/cpp**)
++ Samples of Lambdas functions.
++ Samples of *string_view*.
++ Pairs and Tupples.
++ Samples of metaprogramming.
++ Passing different kind of parameter in functions.
++ A Matrix template library and how to use it.
 
 # Compiling
 
