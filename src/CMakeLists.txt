@@ -7,8 +7,8 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 project(CPPLaboratoryProject VERSION 1.0)
 
-
-add_executable(cpplab 
+add_compile_options("-g")
+add_executable( cpplab 
                 const.cpp 
                 constex.cpp 
                 main.cpp 
@@ -27,5 +27,6 @@ add_executable(cpplab
                 tpair.cpp
                 metaprog.cpp
                 parameters.cpp
+                test_matrix.cpp
                 )
 

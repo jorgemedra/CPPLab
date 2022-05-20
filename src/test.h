@@ -26,7 +26,8 @@ namespace jomt
         Maps = 'T',         // OK
         Pair = 'P',         // OK
         Meta = 'M',         // OK
-        Params = 'A',         // OK
+        Params = 'A',       // OK
+        Matrix = 'X'        //OK
     };
 
     class Test
@@ -46,9 +47,13 @@ namespace jomt
             std::cout   << "-----------------------------\n"
                         << "Running " << info() << "\n";
             doTest();
-            std::cout   << "Test Ended"
+            std::cout   << "Test Ended\n"
                         << "-----------------------------\n";             
-        }
+            char c;
+            //std::cin.readsome(&c,1);
+            c = getchar();
+            c = getchar();
+                }
 
         std::string info(){
             std::stringstream out;
@@ -117,6 +122,9 @@ namespace jomt
                 break;
             case TestType::Params:
                 out << " Parameters";
+                break;
+            case TestType::Matrix:
+                out << " Matrix Operations";
                 break;
             default:
                 out << "UKNOWN Test";

@@ -8,7 +8,7 @@
             "name": "g++ - Build and debug project",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/../bin/tutorial",
+            "program": "${workspaceFolder}/build/cpplab",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

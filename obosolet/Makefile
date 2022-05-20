@@ -24,9 +24,10 @@ OBJ_FLS = 		$(OBJ_DIR)/const.o \
 				$(OBJ_DIR)/lambdas.o \
 				$(OBJ_DIR)/str_view.o \
 				$(OBJ_DIR)/maps.o \
-				$(OBJ_DIR)/parameters.o \
+				$(OBJ_DIR)/tpair.o \				
 				$(OBJ_DIR)/metaprog.o \
-				$(OBJ_DIR)/tpair.o
+				$(OBJ_DIR)/parameters.o \				
+				$(OBJ_DIR)/test_matrix.o
 
 #INCLUDES	= -I/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1
 #LIBS		= -L/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/lib
