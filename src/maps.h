@@ -15,6 +15,8 @@ namespace jomt::test
         void test2();
         void test3();
         void test4();
+        void test5();
+        void test6();
 
     public:
         MapTest() : jomt::Test(jomt::TestType::Maps) {}

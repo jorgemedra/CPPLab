@@ -3,6 +3,7 @@
 #include <map>
 #include "maps.h"
 #include "custom.h"
+#include "interval.hpp"
 
 using namespace jomt::test;
 
@@ -126,10 +127,123 @@ void MapTest::test4()
     std::cout << "\n5. Finish Test1.\n";
 }
 
+/**
+ * @brief Advance thechnics for search and isert into an order map.
+ * 
+ */
+void MapTest::test5()
+{
+
+    std::cout << "\n\nTest5: Advanced thechnics: \n";
+    std::map<int,int> m;
+
+    //Amortizing each insertion element
+    auto iti = m.begin(); 
+    for(int i=1; i<100;i+=2)
+        iti = m.insert(iti, {i,i});
+
+
+    std::cout << "\na):Inserting thr Key 50 and retriving the pointer, to go throught it.\n";
+
+    auto it = m.insert(m.begin(), {50,150}); //O(long(m.size()))
+    std::cout << "\n\ta]: IT   [K:V] = [" << it->first << ":" << it->second << "]\n";
+    it--;
+    std::cout << "\n\ta]: --IT [K:V] = [" << it->first << ":" << it->second << "]\n";
+    it++;
+    std::cout << "\n\ta]: ++IT [K:V] = [" << it->first << ":" << it->second << "]\n";
+    it++;
+    std::cout << "\n\ta]: ++IT [K:V] = [" << it->first << ":" << it->second << "]\n";
+
+
+    std::cout << "\nb):Look for the first element that is not less than 60.\n";
+
+    it = m.lower_bound(60); //O(long(m.size()))
+    std::cout << "\n\tb]: IT   [K:V] = [" << it->first << ":" << it->second << "]\n";
+    std::cout << "\n\tb]: Inserting {60,160} from IT will amortize the operation\n";
+    m.insert(it,{60,160});
+
+
+    std::cout << "\nc):Look for the first element that is greater than 62.\n";
+
+    it = m.upper_bound(62); //O(long(m.size()))
+    std::cout << "\n\tc]: IT   [K:V] = [" << it->first << ":" << it->second << "]\n";
+    std::cout << "\n\tc]: Inserting {62,162} from IT will amortize the operation\n";
+    m.insert(it,{62,162});
+
+
+    std::cout << "\nd):Remove the Interval [51,69), open interval.\n";
+
+    auto itf = m.find(51);
+    auto itl = m.find(69);
+    m.erase(itf,itl);
+
+    std::cout << "\n\tc]: IT LAST   [K:V] = [" << itl->first << ":" << itl->second << "]\n";
+}
+
+
+/**
+ * @brief testig the Interval Data Stucture which has been made over a map structure.
+ */
+void MapTest::test6()
+{
+    std::cout << "\n\nTest6: testing the Interval Data Structure: \n";
+
+    jomt::data::interval<unsigned int, unsigned short> m_int;
+
+    auto showInt = [](jomt::data::interval<unsigned int, unsigned short>& m_i)
+    {
+        std::cout << "{";
+        for(auto it = m_i.begin(); it != m_i.end(); it++)
+            std::cout << " [" << it->first << ":" << it->second << "] ";
+        std::cout << "}" << std::endl;
+    };
+
+
+    std::cout << "a. The initial status of interval<int, short>\n\t";
+    showInt(m_int);
+
+    m_int.insert(0, 10, 1);
+    std::cout << "\nCase A inserting[0,10):1}\n\t";
+    showInt(m_int);
+
+    m_int.insert(5, 10, 1);
+    std::cout << "\nCase B inserting[5,10):1}\n\t";
+    showInt(m_int);
+
+    m_int.insert(5, 8, 4);
+    std::cout << "\nCase C inserting[5,8):4}\n\t";
+    showInt(m_int);
+
+
+    m_int.insert(5, 8, 1);
+    std::cout << "\nCase D inserting[5,8):1}\n\t";
+    showInt(m_int);
+
+    m_int.insert(5, 15, 2);
+    std::cout << "\nCase E inserting[5,15):2}\n\t";
+    showInt(m_int);
+
+    m_int.insert(8, 10, 3);
+    std::cout << "\nCase F inserting[8,10):3}\n\t";
+    showInt(m_int);
+
+    m_int.insert(7, 11, 4);
+    std::cout << "\nCase G inserting[7,11):4}\n\t";
+    showInt(m_int);
+
+    m_int.insert(0, 15, 0);
+    std::cout << "\nCase H inserting[0,15):0}\n\t";
+    showInt(m_int);
+
+    return;
+}
+
 void MapTest::doTest()
 {
-    test1();
-    test2();
-    test3();
-    test4();
+    // test1();
+    // test2();
+    // test3();
+    // test4();
+    //test5();
+    test6();
 }
