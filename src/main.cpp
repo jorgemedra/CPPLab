@@ -21,6 +21,7 @@
 #include "metaprog.h"
 #include "parameters.h"
 #include "test_matrix.h"
+#include "dump.h"
 
 using namespace jomt::test;
 
@@ -47,6 +48,7 @@ struct M_CMDS
     const static std::string META;
     const static std::string PARAMS;
     const static std::string MATRIX;
+    const static std::string DUMP;
 };
 
 const std::string M_CMDS::QT{"quit"};
@@ -68,6 +70,7 @@ const std::string M_CMDS::PAIRS{"pairs"};
 const std::string M_CMDS::META{"metap"};
 const std::string M_CMDS::PARAMS{"params"};
 const std::string M_CMDS::MATRIX{"matrix"};
+const std::string M_CMDS::DUMP{"dump"};
 
 std::string exec(const char *cmd)
 {
@@ -201,6 +204,11 @@ int main()
             jomt::test::TestMatrix mtrx;
             mtrx.runTest();
         }
+        else if (opt.compare(M_CMDS::DUMP) == 0)
+        {
+            jomt::test::TestDump dmp;
+            dmp.runTest();
+        }
     }
     while(opt.compare(M_CMDS::QT) != 0);
 
@@ -229,7 +237,8 @@ void printHelp()
               << "\t" << M_CMDS::PAIRS << ": Pairs & Tuples Test.\n"
               << "\t" << M_CMDS::META << ": Metaprograming Test.\n"
               << "\t" << M_CMDS::PARAMS << ": Parameters Test.\n"
-              << "\t" << M_CMDS::MATRIX<< ": Matrix Operations.\n"
+              << "\t" << M_CMDS::MATRIX << ": Matrix Operations.\n"
+              << "\t" << M_CMDS::DUMP << ": To analize Dump file.\n"
               << "-----------------------\n\n"
               << "$ ";
 }

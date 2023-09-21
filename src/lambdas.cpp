@@ -20,7 +20,7 @@ void LambdaTest::testByCopy()
                 << "\tval(Aft):" << val << "\n";
     };
 
-    //It will capture, by cipy, all the local variables
+    //It will capture, by copy, all the local variables
     auto myFun2 = [=](){
         int lmbVar = localVar;
         std::cout << "\nLambda Fun. By Copy: auto myFun2 = [=]()\n"

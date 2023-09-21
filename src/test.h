@@ -27,7 +27,8 @@ namespace jomt
         Pair = 'P',         // OK
         Meta = 'M',         // OK
         Params = 'A',       // OK
-        Matrix = 'X'        //OK
+        Matrix = 'X',        //OK
+        Dump = 'D'        //OK
     };
 
     class Test
@@ -124,6 +125,9 @@ namespace jomt
                 out << " Parameters";
                 break;
             case TestType::Matrix:
+                out << " Matrix Operations";
+                break;
+            case TestType::Dump:
                 out << " Matrix Operations";
                 break;
             default:

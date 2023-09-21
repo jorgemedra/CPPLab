@@ -36,5 +36,6 @@ add_executable( cpplab
                 metaprog.cpp
                 parameters.cpp
                 test_matrix.cpp
+                dump.cpp
                 )
 
