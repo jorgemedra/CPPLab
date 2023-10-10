@@ -96,6 +96,9 @@ namespace jomt::test
             void on_leap(int id);
     };
 
+
+
+
     class TestThreads:public jomt::Test
     {
         int internalVaule;
@@ -111,6 +114,11 @@ namespace jomt::test
 
         void procA();
         void procB();
+
+        void test_yield();
+        void my_sleep(std::chrono::milliseconds dur);
+        void proc_ya();
+        void proc_yb();
 
     };
 

@@ -2,6 +2,7 @@
 #include "threads.h"
 #include <thread>
 #include <future>
+#include <chrono>
 
 using namespace jomt::test;
 
@@ -215,6 +216,50 @@ void TestThreads::procB()
 }
 
 
+void TestThreads::test_yield(){
+    internalVaule=0;
+    std::thread a(&TestThreads::proc_ya, this);
+    std::thread b(&TestThreads::proc_yb, this);
+
+    if(a.joinable())
+        a.join();
+    if(b.joinable())
+        b.join();
+    std::cout << "\nEnd of Testing Yiedl\n";
+}
+
+void TestThreads::my_sleep(std::chrono::milliseconds dur)
+{
+
+    auto last = std::chrono::high_resolution_clock::now();
+    last += std::chrono::duration_cast<std::chrono::microseconds>(dur);
+
+    while(std::chrono::high_resolution_clock::now() < last)
+        std::this_thread::yield();
+}
+
+void TestThreads::proc_ya(){
+    
+    std::cout << "Thread A init\n";
+    while(internalVaule < 50)
+    {
+        std::cout << "Thread A: wait for 500ms" << std::endl;
+        my_sleep(std::chrono::milliseconds(500));
+        internalVaule++;
+        std::cout << " ra[" << internalVaule << "] " << std::endl;
+    }
+}
+
+void TestThreads::proc_yb(){
+
+    std::cout << "Thread B init\n";
+    while(internalVaule < 50)
+    {
+        internalVaule++;
+        std::cout << " rb[" << internalVaule << "] " << std::endl;
+        my_sleep(std::chrono::milliseconds(250));
+    }
+}
 
 
 
@@ -288,4 +333,9 @@ void TestThreads::doTest()
     TAB tab;
     tab.join();
     std::cout << "Conditional Variable has ended." << std::endl;
+
+    std::cout << "\nTesting Yield." << std::endl;
+    test_yield();
+    
+    
 }   

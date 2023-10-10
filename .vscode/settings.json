@@ -60,7 +60,20 @@
         "stop_token": "cpp",
         "cinttypes": "cpp",
         "map": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "csignal": "cpp",
+        "cstring": "cpp",
+        "strstream": "cpp",
+        "bitset": "cpp",
+        "list": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "semaphore": "cpp",
+        "shared_mutex": "cpp",
+        "cfenv": "cpp",
+        "typeindex": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp"
     },
     "cmake.configureOnOpen": false
 }
